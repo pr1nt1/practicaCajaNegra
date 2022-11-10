@@ -7,43 +7,50 @@ import static org.junit.Assert.*;
 
 public class PruebasTest {
 
-    BinaryTree bt;
-    Node nodeP;
-    Node nodeHD;
-    Node nodeHI;
 
-    public void setNodoP() throws Exception {
-        nodeP = new Node("NodoP1");
-    }
+    Node<String> nodoP = new Node<>("NodoP1");
+    BinaryTree<String> bt1 = new BinaryTree<>(nodoP.getContent());
 
-    public void setNodoHD() throws Exception {
-        nodeHD = new Node("NodoHD1",nodeP);
-        nodeP.setRightChild(nodeHD);
-    }
+    Node nodoHD = bt1.insert("NodoHD1", bt1.getRoot(), false);
+    Node nodoHI = bt1.insert("NodoHI1", bt1.getRoot(), true);
 
-    public void setNodoHI() throws Exception {
-        nodeHI = new Node("NodoHI1",nodeP);
-        nodeP.setLeftChild(nodeHI);
-    }
-
-    public void setBt() throws Exception {
-        bt = new BinaryTree(nodeP);
-    }
+    Node nodoHDD = bt1.insert("NodoHD2", nodoHD, false);
+    Node nodoHDDD = bt1.insert("NodoHD3", nodoHDD, false);
 
     @Test
     public void depthTest(){
-        int depth = this.bt.depth();
-       assertEquals(true, depth == this.bt.depth());
+       assertEquals(true, this.bt1.depth() == 4);
     }
 
     @Test
-    public void depthTest2(){
-
+    public void depthConParametrosTest(){
+        assertEquals(true, this.bt1.depth(nodoHD) == 3);
     }
 
     @Test
-    public void getRootTest(){
-        Node node = this.nodeP;
-        assertEquals(true, node == this.nodeP);
+    public void equalsTest(){ // da true
+        Node<String> nodoP = new Node<>("NodoP1");
+        BinaryTree<String> bt2 = new BinaryTree<>(nodoP.getContent());
+
+        Node nodoHD = bt2.insert("NodoHD1", bt2.getRoot(), false);
+        Node nodoHI = bt2.insert("NodoHI1", bt2.getRoot(), true);
+
+        Node nodoHDD = bt2.insert("NodoHD2", nodoHD, false);
+        Node nodoHDDD = bt2.insert("NodoHD3", nodoHDD, false);
+
+        assertEquals(true, this.bt1.equals(bt2));
+    }
+
+    @Test
+    public void equalsTest2(){ //da true y no debería (si se cambia el contenido del nodo padre si da error
+                               // por lo que parece que la función solo mira si es igual el contenido del nodo padre )
+        Node<String> nodoP = new Node<>("NodoP1");
+        BinaryTree<String> bt2 = new BinaryTree<>(nodoP.getContent());
+
+        Node nodoHD = bt2.insert("NodoHD1", bt2.getRoot(), false);
+        Node nodoHI = bt2.insert("NodoHI1", bt2.getRoot(), true);
+
+
+        assertEquals(true, this.bt1.equals(bt2));
     }
 }
