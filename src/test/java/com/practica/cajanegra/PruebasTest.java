@@ -53,4 +53,11 @@ public class PruebasTest {
 
         assertEquals(true, this.bt1.equals(bt2));
     }
+
+    @Test
+    public void getRootTest(){
+        assertEquals(true, this.bt1.getRoot().getContent().equals("NodoP1"));
+        assertEquals(true, this.bt1.getRoot().getLeftChild().getContent().equals("NodoHI1"));
+        assertEquals(true, this.bt1.getRoot().getRightChild().getContent().equals("NodoHD1"));
+    }
 }
