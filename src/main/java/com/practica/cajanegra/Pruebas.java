@@ -8,7 +8,7 @@ public class Pruebas {
 
         /** Primer arbol **/
 
-        Node<String> nodoP = new Node<>("NodoP1");
+        Node<String> nodoP = new Node<>("23432");
         BinaryTree<String> bt = new BinaryTree<>(nodoP.getContent());
 
         Node nodoHD = bt.insert("NodoHD1", bt.getRoot(), false);
