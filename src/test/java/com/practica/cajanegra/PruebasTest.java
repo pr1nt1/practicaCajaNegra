@@ -4,40 +4,46 @@ import com.binarytree.BinaryTree;
 import com.binarytree.Node;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertThrows;
+
 
 public class PruebasTest {
 
-
-    Node<String> nodoP = new Node<>("NodoP1");
-    BinaryTree<String> bt1 = new BinaryTree<>(nodoP.getContent());
+    BinaryTree<String> bt1 = new BinaryTree<>("NodoP1");
     Node nodoHD = bt1.insert("NodoHD1", bt1.getRoot(), false);
     Node nodoHI = bt1.insert("NodoHI1", bt1.getRoot(), true);
-    Node nodoHDD = bt1.insert("NodoHD2", nodoHD, false);
+    final Node nodoHDD = bt1.insert("NodoHD2", nodoHD, false);
     Node nodoHDDD = bt1.insert("NodoHD3", nodoHDD, false);
 
     @Test
     public void binaryTreeTest1() {
-        BinaryTree<String> bt2 = new BinaryTree<>("Laura2");
-        assertTrue(bt2.getRoot().getContent().equals("Laura2"));
-        assertEquals(null, bt2.getRoot().getLeftChild());
-        assertEquals(null, bt2.getRoot().getRightChild());
+        BinaryTree<String> bt = new BinaryTree<>("Laura2");
+        assertEquals("Laura2", bt.getRoot().getContent());
+        assertNull(bt.getRoot().getLeftChild());
+        assertNull(bt.getRoot().getRightChild());
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void binaryTreeTest2() { //solo letras
-        BinaryTree<String> bt3 = new BinaryTree<>("Laura");
+        BinaryTree<String> bt = new BinaryTree<>("Laura");
+        assertEquals("Laura", bt.getRoot().getContent());
+        assertNull(bt.getRoot().getLeftChild());
+        assertNull(bt.getRoot().getRightChild());
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void binaryTreeTest3() { //solo numeros
-        BinaryTree<String> bt3 = new BinaryTree<>("324");
+        BinaryTree<String> bt = new BinaryTree<>("324");
+        assertEquals("324", bt.getRoot().getContent());
+        assertNull(bt.getRoot().getLeftChild());
+        assertNull(bt.getRoot().getRightChild());
     }
 
-    //TODO: Queda hacerlo
     @Test(expected = IllegalArgumentException.class)
-    public void binaryTreeTest4() { //NO ASCII
-        BinaryTree<String> bt3 = new BinaryTree<>("324");
+    public void binaryTreeTest4() { //ASCII
+        BinaryTree<String> bt = new BinaryTree<>("/ ()*:_ª");
+        assertEquals("/ ()*:_ª", bt.getRoot().getContent());
+        assertNull(bt.getRoot().getLeftChild());
+        assertNull(bt.getRoot().getRightChild());
     }
 
     @Test
@@ -79,8 +85,50 @@ public class PruebasTest {
 
     @Test
     public void getRootTest() {
-        assertTrue(this.bt1.getRoot().getContent().equals("NodoP1"));
-        assertTrue(this.bt1.getRoot().getLeftChild().getContent().equals("NodoHI1"));
-        assertTrue(this.bt1.getRoot().getRightChild().getContent().equals("NodoHD1"));
+        assertEquals("NodoP1", this.bt1.getRoot().getContent());
+        assertEquals("NodoHI1", this.bt1.getRoot().getLeftChild().getContent());
+        assertEquals("NodoHD1", this.bt1.getRoot().getRightChild().getContent());
+    }
+
+    @Test
+    public void getSubTreeTest(){
+        BinaryTree aux = this.bt1.getSubTree(this.bt1.getRoot().getRightChild());
+
+        assertNull(aux.getRoot().getParent());
+
+        assertEquals("NodoHD1", aux.getRoot().getContent());
+        assertNull(aux.getRoot().getLeftChild());
+
+        assertEquals("NodoHD2", aux.getRoot().getRightChild().getContent());
+        assertNull(aux.getRoot().getRightChild().getLeftChild());
+
+        assertEquals("NodoHD3", aux.getRoot().getRightChild().getRightChild().getContent());
+        assertNull(aux.getRoot().getRightChild().getRightChild().getRightChild());
+        assertNull(aux.getRoot().getRightChild().getRightChild().getLeftChild());
+    }
+
+    @Test
+    public void sizeTest(){
+        assertEquals(5, bt1.size());
+    }
+
+    @Test
+    public void searchTest(){
+        Node aux = this.bt1.search("NodoHD1");
+        assertEquals("NodoHD1", aux.getContent());
+        assertEquals(this.bt1.getRoot(), aux.getParent());
+        assertEquals(this.bt1.getRoot().getRightChild().getRightChild(), aux.getRightChild());
+    }
+
+    @Test
+    public void searchTest2(){
+        Node aux = this.bt1.search("NodoP1");
+        assertEquals("NodoP1", aux.getContent());
+    }
+
+    @Test
+    public void removeTest(){ //remove no furula
+        this.bt1.remove(nodoHDDD);
+        assertNull(this.bt1.getRoot().getRightChild().getRightChild().getRightChild());
     }
 }
