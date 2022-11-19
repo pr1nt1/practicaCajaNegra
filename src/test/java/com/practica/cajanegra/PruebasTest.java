@@ -127,7 +127,27 @@ public class PruebasTest {
     }
 
     @Test
-    public void removeTest(){ //remove no furula
+    public void searchTest3(){ //falla porque efectivamente no lo encuentra.
+        bt1.remove(nodoHI);
+        Node aux = this.bt1.search("NodoHI1");
+        assertEquals("NodoHI1", aux.getContent());
+    }
+
+    @Test
+    public void searchTest4(){ //falla, tiene pinta de que el error se encuentra en remove.
+        bt1.remove(nodoHD);
+        Node aux = this.bt1.search("NodoHD1");
+        assertEquals("NodoHD1", aux.getContent());
+    }
+
+    @Test
+    public void removeTest(){ //remove no funciona "Node out of this tree"
+        this.bt1.remove(nodoHDD);
+        assertNull(this.bt1.getRoot().getRightChild().getRightChild());
+    }
+
+    @Test
+    public void removeTest2(){ //remove solo funciona si se está borrando un nodo hoja
         this.bt1.remove(nodoHDDD);
         assertNull(this.bt1.getRoot().getRightChild().getRightChild().getRightChild());
     }
