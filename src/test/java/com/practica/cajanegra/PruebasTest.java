@@ -3,7 +3,12 @@ package com.practica.cajanegra;
 import com.binarytree.BinaryTree;
 import com.binarytree.Node;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 
 public class PruebasTest {
@@ -39,7 +44,7 @@ public class PruebasTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void binaryTreeTest4() { //ASCII
+    public void binaryTreeTest4() { //simbolos
         BinaryTree<String> bt = new BinaryTree<>("/ ()*:_ª");
         assertEquals("/ ()*:_ª", bt.getRoot().getContent());
         assertNull(bt.getRoot().getLeftChild());
@@ -108,9 +113,39 @@ public class PruebasTest {
     }
 
     @Test
-    public void sizeTest(){
-        assertEquals(5, bt1.size());
+    public void insertTest(){ //funciona
+        this.bt1.insert("NodoHI2", this.nodoHI, true);
+        assertEquals("NodoHI2", this.bt1.getRoot().getLeftChild().getLeftChild().getContent());
     }
+
+    @Test
+    public void insertTest2(){ //se ha insertado un nodo en una posición en la que ya existía un nodo, ¿debería poder o no poder hacerlo?
+        this.bt1.insert("NodoHI2", this.bt1.getRoot(), true);
+        assertEquals("NodoHI2", this.bt1.getRoot().getLeftChild().getContent());
+    }
+
+    @Test
+    public void iteratorTest(){
+        Iterator<String> it = this.bt1.iterator();
+        assertEquals("NodoP1", it.next());
+        assertEquals("NodoHI1", it.next());
+        assertEquals("NodoHD1", it.next());
+        assertEquals("NodoHD2", it.next());
+        assertEquals("NodoHD3", it.next());
+    }
+
+    @Test
+    public void removeTest(){ //remove no funciona "Node out of this tree"
+        this.bt1.remove(nodoHDD);
+        assertNull(this.bt1.getRoot().getRightChild().getRightChild());
+    }
+
+    @Test
+    public void removeTest2(){ //remove solo funciona si se está borrando un nodo hoja
+        this.bt1.remove(nodoHDDD);
+        assertNull(this.bt1.getRoot().getRightChild().getRightChild().getRightChild());
+    }
+
 
     @Test
     public void searchTest(){
@@ -127,28 +162,41 @@ public class PruebasTest {
     }
 
     @Test
-    public void searchTest3(){ //falla porque efectivamente no lo encuentra.
+    public void searchTest3(){ //falla porque no lo encuentra ya que se borro ese nodo hoja.
         bt1.remove(nodoHI);
         Node aux = this.bt1.search("NodoHI1");
         assertEquals("NodoHI1", aux.getContent());
     }
 
     @Test
-    public void searchTest4(){ //falla, tiene pinta de que el error se encuentra en remove.
+    public void searchTest4(){ //falla, el error se encuentra en remove ya que no funciona correctamente.
         bt1.remove(nodoHD);
         Node aux = this.bt1.search("NodoHD1");
         assertEquals("NodoHD1", aux.getContent());
     }
 
     @Test
-    public void removeTest(){ //remove no funciona "Node out of this tree"
-        this.bt1.remove(nodoHDD);
-        assertNull(this.bt1.getRoot().getRightChild().getRightChild());
+    public void sizeTest(){
+        assertEquals(5, bt1.size());
     }
 
     @Test
-    public void removeTest2(){ //remove solo funciona si se está borrando un nodo hoja
-        this.bt1.remove(nodoHDDD);
-        assertNull(this.bt1.getRoot().getRightChild().getRightChild().getRightChild());
+    public void toListTest(){
+        ArrayList<String> arr = this.bt1.toList();
+        int i = 0;
+        assertEquals("NodoP1", arr.get(i));
+        i++;
+        assertEquals("NodoHI1", arr.get(i));
+        i++;
+        assertEquals("NodoHD1", arr.get(i));
+        i++;
+        assertEquals("NodoHD2", arr.get(i));
+        i++;
+        assertEquals("NodoHD3", arr.get(i));
+    }
+
+    @Test
+    public void toStringTest(){
+        assertEquals("NodoP1 Left: NodoHI1 Right: NodoHD1 \nNodoHI1 \nNodoHD1 Right: NodoHD2 \nNodoHD2 Right: NodoHD3 \nNodoHD3 \n", this.bt1.toString());
     }
 }
