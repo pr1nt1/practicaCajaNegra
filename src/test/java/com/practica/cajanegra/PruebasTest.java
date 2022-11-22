@@ -13,10 +13,12 @@ import static org.junit.Assert.assertNull;
 
 public class PruebasTest {
 
+    /**ÁRBOL DE VARIOS NODOS**/
+
     BinaryTree<String> bt1 = new BinaryTree<>("NodoP1");
     Node nodoHD = bt1.insert("NodoHD1", bt1.getRoot(), false);
     Node nodoHI = bt1.insert("NodoHI1", bt1.getRoot(), true);
-    final Node nodoHDD = bt1.insert("NodoHD2", nodoHD, false);
+    Node nodoHDD = bt1.insert("NodoHD2", nodoHD, false);
     Node nodoHDDD = bt1.insert("NodoHD3", nodoHDD, false);
 
     @Test
@@ -58,7 +60,7 @@ public class PruebasTest {
 
     @Test
     public void depthConParametrosTest(){
-        assertEquals(3, this.bt1.depth(nodoHD));
+        assertEquals(3, this.bt1.depth(this.bt1.getRoot().getRightChild()));
     }
 
     @Test
@@ -146,7 +148,6 @@ public class PruebasTest {
         assertNull(this.bt1.getRoot().getRightChild().getRightChild().getRightChild());
     }
 
-
     @Test
     public void searchTest(){
         Node aux = this.bt1.search("NodoHD1");
@@ -159,6 +160,7 @@ public class PruebasTest {
     public void searchTest2(){
         Node aux = this.bt1.search("NodoP1");
         assertEquals("NodoP1", aux.getContent());
+        assertEquals(this.bt1.getRoot().getContent(), aux.getContent());
     }
 
     @Test
