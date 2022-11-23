@@ -125,6 +125,18 @@ public class PruebasTest {
         this.bt1.insert("NodoHI2", this.bt1.getRoot(), true);
         assertEquals("NodoHI2", this.bt1.getRoot().getLeftChild().getContent());
     }
+    
+    @Test
+    public void insertTest3(){
+        this.bt1.insert("22", this.bt1.getRoot().getLeftChild(), true);
+        assertEquals("22", this.bt1.getRoot().getLeftChild().getLeftChild().getContent());
+    }
+    
+    @Test
+    public void insertTest4(){
+        this.bt1.insert("dd", this.bt1.getRoot().getLeftChild(), true);
+        assertEquals("dd", this.bt1.getRoot().getLeftChild().getLeftChild().getContent());
+    }
 
     @Test
     public void iteratorTest(){
@@ -134,6 +146,7 @@ public class PruebasTest {
         assertEquals("NodoHD1", it.next());
         assertEquals("NodoHD2", it.next());
         assertEquals("NodoHD3", it.next());
+        assertFalse(it.hasNext());
     }
 
     @Test
@@ -185,7 +198,9 @@ public class PruebasTest {
     @Test
     public void toListTest(){
         ArrayList<String> arr = this.bt1.toList();
-        int i = 0;
+        ArrayList<String> aux = new ArrayList<>(Arrays.asList("NodoP1", "NodoHI1", "NodoHD1", "NodoHD2", "NodoHD3"));
+        assertTrue(aux.equals(arr));
+       /* int i = 0;
         assertEquals("NodoP1", arr.get(i));
         i++;
         assertEquals("NodoHI1", arr.get(i));
@@ -194,7 +209,7 @@ public class PruebasTest {
         i++;
         assertEquals("NodoHD2", arr.get(i));
         i++;
-        assertEquals("NodoHD3", arr.get(i));
+        assertEquals("NodoHD3", arr.get(i));*/
     }
 
     @Test
