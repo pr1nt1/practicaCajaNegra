@@ -53,6 +53,30 @@ public class PruebasTest {
         assertNull(bt.getRoot().getRightChild());
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void binaryTreeTest5() { //simbolos
+        BinaryTree<String> bt = new BinaryTree<>("Laura/ ()*:_ª");
+        assertEquals("Laura/ ()*:_ª", bt.getRoot().getContent());
+        assertNull(bt.getRoot().getLeftChild());
+        assertNull(bt.getRoot().getRightChild());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void binaryTreeTest6() { //simbolos
+        BinaryTree<String> bt = new BinaryTree<>("32/ ()*:_ª");
+        assertEquals("32/ ()*:_ª", bt.getRoot().getContent());
+        assertNull(bt.getRoot().getLeftChild());
+        assertNull(bt.getRoot().getRightChild());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void binaryTreeTest7() { //simbolos
+        BinaryTree<String> bt = new BinaryTree<>("Laura32/ ()*:_ª");
+        assertEquals("Laura32/ ()*:_ª", bt.getRoot().getContent());
+        assertNull(bt.getRoot().getLeftChild());
+        assertNull(bt.getRoot().getRightChild());
+    }
+
     @Test
     public void depthTest(){
        assertEquals(4, this.bt1.depth());
@@ -91,14 +115,26 @@ public class PruebasTest {
     }
 
     @Test
-    public void getRootTest() {
+    public void getRootTest1() {
+        Node nodoRaiz = new Node("NodoP1");
+        assertEquals(nodoRaiz, this.bt1.getRoot());
+    }
+
+    @Test
+    public void getRootTest2() {
         assertEquals("NodoP1", this.bt1.getRoot().getContent());
         assertEquals("NodoHI1", this.bt1.getRoot().getLeftChild().getContent());
         assertEquals("NodoHD1", this.bt1.getRoot().getRightChild().getContent());
     }
 
     @Test
-    public void getSubTreeTest(){
+    public void getRootTest3() {
+        Node nodoRaiz = new Node("NodoHD1");
+        assertEquals(nodoRaiz, this.bt1.getRoot());
+    }
+
+    @Test
+    public void getSubTreeTest1(){
         BinaryTree aux = this.bt1.getSubTree(this.bt1.getRoot().getRightChild());
 
         assertNull(aux.getRoot().getParent());
@@ -115,7 +151,14 @@ public class PruebasTest {
     }
 
     @Test
-    public void insertTest(){ //funciona
+    public void getSubTreeTest2(){
+        BinaryTree aux = this.bt1.getSubTree(this.bt1.getRoot().getRightChild());
+
+        assertEquals(aux.getRoot().getContent(), this.bt1.getRoot().getRightChild().getContent());
+    }
+
+    @Test
+    public void insertTest1(){ //funciona
         this.bt1.insert("NodoHI2", this.nodoHI, true);
         assertEquals("NodoHI2", this.bt1.getRoot().getLeftChild().getLeftChild().getContent());
     }
@@ -132,20 +175,47 @@ public class PruebasTest {
         assertEquals("22", this.bt1.getRoot().getLeftChild().getLeftChild().getContent());
     }
     
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void insertTest4(){
         this.bt1.insert("dd", this.bt1.getRoot().getLeftChild(), true);
         assertEquals("dd", this.bt1.getRoot().getLeftChild().getLeftChild().getContent());
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void insertTest5(){
+        this.bt1.insert("dd& %", this.bt1.getRoot().getLeftChild(), true);
+        assertEquals("dd& %", this.bt1.getRoot().getLeftChild().getLeftChild().getContent());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void insertTest6(){
+        this.bt1.insert("dd32& %", this.bt1.getRoot().getLeftChild(), true);
+        assertEquals("dd32& %", this.bt1.getRoot().getLeftChild().getLeftChild().getContent());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void insertTest7(){
+        this.bt1.insert("23& %", this.bt1.getRoot().getLeftChild(), true);
+        assertEquals("23& %", this.bt1.getRoot().getLeftChild().getLeftChild().getContent());
+    }
+
     @Test
-    public void iteratorTest(){
+    public void iteratorTest1(){
         Iterator<String> it = this.bt1.iterator();
         assertEquals("NodoP1", it.next());
         assertEquals("NodoHI1", it.next());
         assertEquals("NodoHD1", it.next());
         assertEquals("NodoHD2", it.next());
         assertEquals("NodoHD3", it.next());
+        assertFalse(it.hasNext());
+    }
+
+    @Test
+    public void iteratorTest2(){
+        Iterator<String> it = this.bt1.iterator();
+        assertEquals("NodoP1", it.next());
+        assertEquals("NodoHI1", it.next());
+        assertEquals("NodoHD1", it.next());
         assertFalse(it.hasNext());
     }
 
@@ -196,7 +266,7 @@ public class PruebasTest {
     }
 
     @Test
-    public void toListTest(){
+    public void toListTest1(){
         ArrayList<String> arr = this.bt1.toList();
         ArrayList<String> aux = new ArrayList<>(Arrays.asList("NodoP1", "NodoHI1", "NodoHD1", "NodoHD2", "NodoHD3"));
         assertTrue(aux.equals(arr));
@@ -213,7 +283,19 @@ public class PruebasTest {
     }
 
     @Test
-    public void toStringTest(){
+    public void toListTest2(){
+        ArrayList<String> arr = this.bt1.toList();
+        ArrayList<String> aux = new ArrayList<>(Arrays.asList("NodoP1", "NodoHD1", "NodoHD2"));
+        assertTrue(aux.equals(arr));
+    }
+
+    @Test
+    public void toStringTest1(){
         assertEquals("NodoP1 Left: NodoHI1 Right: NodoHD1 \nNodoHI1 \nNodoHD1 Right: NodoHD2 \nNodoHD2 Right: NodoHD3 \nNodoHD3 \n", this.bt1.toString());
+    }
+
+    @Test
+    public void toStringTest2(){
+        assertEquals("NodoP1 Left: NodoHI1 Right: NodoHD1 \n", this.bt1.toString());
     }
 }
