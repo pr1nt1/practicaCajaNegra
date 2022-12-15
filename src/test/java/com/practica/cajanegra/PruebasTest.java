@@ -29,7 +29,7 @@ public class PruebasTest {
         assertNull(bt.getRoot().getRightChild());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void binaryTreeTest2() { //solo letras
         BinaryTree<String> bt = new BinaryTree<>("Laura");
         assertEquals("Laura", bt.getRoot().getContent());
@@ -37,7 +37,7 @@ public class PruebasTest {
         assertNull(bt.getRoot().getRightChild());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void binaryTreeTest3() { //solo numeros
         BinaryTree<String> bt = new BinaryTree<>("324");
         assertEquals("324", bt.getRoot().getContent());
@@ -45,7 +45,7 @@ public class PruebasTest {
         assertNull(bt.getRoot().getRightChild());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void binaryTreeTest4() { //simbolos
         BinaryTree<String> bt = new BinaryTree<>("/ ()*:_ª");
         assertEquals("/ ()*:_ª", bt.getRoot().getContent());
@@ -53,7 +53,7 @@ public class PruebasTest {
         assertNull(bt.getRoot().getRightChild());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void binaryTreeTest5() { //simbolos
         BinaryTree<String> bt = new BinaryTree<>("Laura/ ()*:_ª");
         assertEquals("Laura/ ()*:_ª", bt.getRoot().getContent());
@@ -69,7 +69,7 @@ public class PruebasTest {
         assertNull(bt.getRoot().getRightChild());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void binaryTreeTest7() { //simbolos
         BinaryTree<String> bt = new BinaryTree<>("Laura32/ ()*:_ª");
         assertEquals("Laura32/ ()*:_ª", bt.getRoot().getContent());
@@ -290,7 +290,7 @@ public class PruebasTest {
     }
 
     @Test
-    public void toStringTest1(){
+    public void toStringTest1(){ //esta mal
         assertEquals("NodoP1 Left: NodoHI1 Right: NodoHD1 \nNodoHI1 \nNodoHD1 Right: NodoHD2 \nNodoHD2 Right: NodoHD3 \nNodoHD3 \n", this.bt1.toString());
     }
 
