@@ -90,4 +90,5 @@ public class PruebasTest2 {
     public void toStringTest(){
         assertEquals("NodoP1 \n", this.bt.toString());
     }
+
 }

@@ -137,14 +137,14 @@ public class PruebasTest3 {
 
     @Test
     public void removeTest(){ //remove no funciona "Node out of this tree"
-        this.bt.remove(nodoHDD);
-        assertNull(this.bt.getRoot().getRightChild().getRightChild());
+        this.bt.remove(nodoHD);
+        assertNull(this.bt.getRoot().getRightChild());
     }
 
     @Test
     public void removeTest2(){ //remove solo funciona si se está borrando un nodo hoja
         this.bt.remove(nodoHDD);
-        assertNull(this.bt.getRoot().getRightChild().getRightChild().getRightChild());
+        assertNull(this.bt.getRoot().getRightChild().getRightChild());
     }
 
     @Test

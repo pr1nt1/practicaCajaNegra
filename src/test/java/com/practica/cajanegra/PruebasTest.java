@@ -78,6 +78,70 @@ public class PruebasTest {
     }
 
     @Test
+    public void binaryTreeTest8() { //letras minusculas solo
+        BinaryTree<String> bt = new BinaryTree<>("laura");
+        assertEquals("laura", bt.getRoot().getContent());
+        assertNull(bt.getRoot().getLeftChild());
+        assertNull(bt.getRoot().getRightChild());
+    }
+
+    @Test
+    public void binaryTreeTest9() { //letras mayusculas solo
+        BinaryTree<String> bt = new BinaryTree<>("LAURA");
+        assertEquals("LAURA", bt.getRoot().getContent());
+        assertNull(bt.getRoot().getLeftChild());
+        assertNull(bt.getRoot().getRightChild());
+    }
+
+    @Test
+    public void binaryTreeTest10() { //letras mayusculas y nums
+        BinaryTree<String> bt = new BinaryTree<>("LAURA1");
+        assertEquals("LAURA1", bt.getRoot().getContent());
+        assertNull(bt.getRoot().getLeftChild());
+        assertNull(bt.getRoot().getRightChild());
+    }
+
+    @Test
+    public void binaryTreeTest11() { //letras minusculas y nums
+        BinaryTree<String> bt = new BinaryTree<>("laura1");
+        assertEquals("laura1", bt.getRoot().getContent());
+        assertNull(bt.getRoot().getLeftChild());
+        assertNull(bt.getRoot().getRightChild());
+    }
+
+    @Test
+    public void binaryTreeTest12() { //letras minusculas, nums y simbolos
+        BinaryTree<String> bt = new BinaryTree<>("laura1#");
+        assertEquals("laura1#", bt.getRoot().getContent());
+        assertNull(bt.getRoot().getLeftChild());
+        assertNull(bt.getRoot().getRightChild());
+    }
+
+    @Test
+    public void binaryTreeTest13() { //letras minusculas, nums y simbolos
+        BinaryTree<String> bt = new BinaryTree<>("LAURA1#");
+        assertEquals("LAURA1#", bt.getRoot().getContent());
+        assertNull(bt.getRoot().getLeftChild());
+        assertNull(bt.getRoot().getRightChild());
+    }
+
+    @Test
+    public void binaryTreeTest14() { //letras minusculas, nums y simbolos
+        BinaryTree<String> bt = new BinaryTree<>("LAURA#");
+        assertEquals("LAURA#", bt.getRoot().getContent());
+        assertNull(bt.getRoot().getLeftChild());
+        assertNull(bt.getRoot().getRightChild());
+    }
+
+    @Test
+    public void binaryTreeTest15() { //letras minusculas, nums y simbolos
+        BinaryTree<String> bt = new BinaryTree<>("laura#");
+        assertEquals("laura#", bt.getRoot().getContent());
+        assertNull(bt.getRoot().getLeftChild());
+        assertNull(bt.getRoot().getRightChild());
+    }
+
+    @Test
     public void depthTest(){
        assertEquals(4, this.bt1.depth());
     }
@@ -158,6 +222,16 @@ public class PruebasTest {
     }
 
     @Test
+    public void getSubTreeTest3(){
+        BinaryTree aux = this.bt1.getSubTree(this.bt1.getRoot().getLeftChild());
+
+        assertNull(aux.getRoot().getParent());
+        assertNull(aux.getRoot().getRightChild());
+        assertNull(aux.getRoot().getLeftChild());
+        assertEquals("NodoHI1", aux.getRoot().getContent());
+    }
+
+    @Test
     public void insertTest1(){ //funciona
         this.bt1.insert("NodoHI2", this.nodoHI, true);
         assertEquals("NodoHI2", this.bt1.getRoot().getLeftChild().getLeftChild().getContent());
@@ -175,28 +249,52 @@ public class PruebasTest {
         assertEquals("22", this.bt1.getRoot().getLeftChild().getLeftChild().getContent());
     }
     
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void insertTest4(){
         this.bt1.insert("dd", this.bt1.getRoot().getLeftChild(), true);
         assertEquals("dd", this.bt1.getRoot().getLeftChild().getLeftChild().getContent());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void insertTest5(){
         this.bt1.insert("dd& %", this.bt1.getRoot().getLeftChild(), true);
         assertEquals("dd& %", this.bt1.getRoot().getLeftChild().getLeftChild().getContent());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void insertTest6(){
         this.bt1.insert("dd32& %", this.bt1.getRoot().getLeftChild(), true);
         assertEquals("dd32& %", this.bt1.getRoot().getLeftChild().getLeftChild().getContent());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void insertTest7(){
         this.bt1.insert("23& %", this.bt1.getRoot().getLeftChild(), true);
         assertEquals("23& %", this.bt1.getRoot().getLeftChild().getLeftChild().getContent());
+    }
+
+    @Test
+    public void insertTest8(){
+        this.bt1.insert("LAU", this.bt1.getRoot().getLeftChild(), true);
+        assertEquals("LAU", this.bt1.getRoot().getLeftChild().getLeftChild().getContent());
+    }
+
+    @Test
+    public void insertTest9(){
+        this.bt1.insert("Lau", this.bt1.getRoot().getLeftChild(), true);
+        assertEquals("Lau", this.bt1.getRoot().getLeftChild().getLeftChild().getContent());
+    }
+
+    @Test
+    public void insertTest10(){
+        this.bt1.insert("Lau()3", this.bt1.getRoot().getLeftChild(), true);
+        assertEquals("Lau()3", this.bt1.getRoot().getLeftChild().getLeftChild().getContent());
+    }
+
+    @Test
+    public void insertTest11(){
+        this.bt1.insert("LAU()3", this.bt1.getRoot().getLeftChild(), true);
+        assertEquals("LAU()3", this.bt1.getRoot().getLeftChild().getLeftChild().getContent());
     }
 
     @Test
@@ -258,6 +356,12 @@ public class PruebasTest {
         bt1.remove(nodoHD);
         Node aux = this.bt1.search("NodoHD1");
         assertEquals("NodoHD1", aux.getContent());
+    }
+
+    @Test
+    public void searchTest5(){
+        Node aux = this.bt1.search("NodoHD1");
+        assertEquals(bt1.getRoot().getRightChild().getContent(), aux.getContent());
     }
 
     @Test
