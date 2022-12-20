@@ -157,6 +157,7 @@ public class PruebasTest3 {
         assertNull(this.bt.getRoot().getRightChild().getLeftChild());
         this.bt.remove(this.bt.getRoot().getRightChild());
         assertNull(this.bt.getRoot().getRightChild());
+        assertNotNull(this.bt.getRoot());
     }
 
     @Test
