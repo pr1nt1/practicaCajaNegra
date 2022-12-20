@@ -211,6 +211,6 @@ public class PruebasTest3 {
     @Test
     public void toStringTest(){
         System.out.println(bt);
-      //  assertEquals("NodoP1 Left: NodoHI1 Right: NodoHD1 \nNodoHI1 \nNodoHD1 Right: NodoHD2 \nNodoHD2 Right: NodoHD3 \nNodoHD3 \n", this.bt.toString());
+        assertEquals("NodoP1 Left: NodoHI1 Right: NodoHD1 \nNodoHI1 Left: NodoHI3 Right: NodoHD3 \nNodoHD1 Left: NodoHI2 Right: NodoHD2 \nNodoHI3 \nNodoHD3 \nNodoHI2 \nNodoHD2 \n", this.bt.toString());
     }
 }
