@@ -142,6 +142,14 @@ public class PruebasTest {
     }
 
     @Test
+    public void binaryTreeTest16() { //null
+        BinaryTree<String> bt = new BinaryTree<>(null);
+        assertNull(bt.getRoot().getContent());
+        assertNull(bt.getRoot().getLeftChild());
+        assertNull(bt.getRoot().getRightChild());
+    }
+
+    @Test
     public void depthTest(){
        assertEquals(4, this.bt1.depth());
     }
@@ -232,6 +240,15 @@ public class PruebasTest {
     }
 
     @Test
+    public void getSubTreeTest4(){
+        BinaryTree aux = this.bt1.getSubTree(this.bt1.getRoot().getRightChild());
+
+        ArrayList<String> aux2 = new ArrayList<>(Arrays.asList("NodoHD1", "NodoHD2", "NodoHD3"));
+        assertTrue(aux2.equals(aux));
+
+    }
+
+    @Test
     public void insertTest1(){ //funciona
         this.bt1.insert("NodoHI2", this.nodoHI, true);
         assertEquals("NodoHI2", this.bt1.getRoot().getLeftChild().getLeftChild().getContent());
@@ -269,8 +286,8 @@ public class PruebasTest {
 
     @Test
     public void insertTest7(){
-        this.bt1.insert("23& %", this.bt1.getRoot().getLeftChild(), true);
-        assertEquals("23& %", this.bt1.getRoot().getLeftChild().getLeftChild().getContent());
+        this.bt1.insert("23& %", this.bt1.getRoot().getLeftChild(), false);
+        assertEquals("23& %", this.bt1.getRoot().getLeftChild().getRightChild().getContent());
     }
 
     @Test
